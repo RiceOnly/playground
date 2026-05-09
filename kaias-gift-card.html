@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaia's Gift Card</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #e8ede8;
+      font-family: 'Georgia', serif;
+    }
+
+    .card {
+      width: 340px;
+      height: 214px;
+      background: #d6e8d8;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+
+    /* Soft background blobs */
+    .card::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 70%);
+      top: -40px;
+      left: -40px;
+      border-radius: 50%;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      bottom: -30px;
+      right: -20px;
+      border-radius: 50%;
+    }
+
+    /* Sparkles */
+    .sparkle {
+      position: absolute;
+      color: #5a9e6f;
+      font-size: 14px;
+      opacity: 0.7;
+      animation: twinkle 2.5s infinite alternate;
+    }
+    .sparkle:nth-child(1) { top: 18px; left: 28px; font-size: 18px; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 10px; left: 120px; font-size: 10px; animation-delay: 0.4s; }
+    .sparkle:nth-child(3) { top: 50px; left: 60px; font-size: 8px; animation-delay: 0.8s; }
+    .sparkle:nth-child(4) { bottom: 28px; right: 100px; font-size: 12px; animation-delay: 0.2s; }
+    .sparkle:nth-child(5) { bottom: 14px; right: 55px; font-size: 9px; animation-delay: 1s; }
+    .sparkle:nth-child(6) { top: 80px; left: 20px; font-size: 7px; animation-delay: 1.4s; }
+    .sparkle:nth-child(7) { top: 12px; right: 70px; font-size: 10px; animation-delay: 0.6s; }
+
+    @keyframes twinkle {
+      from { opacity: 0.4; transform: scale(0.9); }
+      to   { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    /* Dot scatter */
+    .dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .dot {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #6db88a;
+      border-radius: 50%;
+      opacity: 0.35;
+    }
+
+    /* Brand name top-right */
+    .brand {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #2d6b47;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    /* Center illustration area */
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      z-index: 10;
+    }
+
+    .text-left {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #4a7a5a;
+      text-transform: uppercase;
+      font-family: 'Trebuchet MS', sans-serif;
+      opacity: 0.85;
+    }
+
+    .cup-wrap {
+      position: relative;
+      width: 64px;
+      height: 80px;
+      margin: 0 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Cup SVG inline */
+    .cup-svg {
+      width: 48px;
+      height: 62px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Hand SVG */
+    .hand-svg {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      z-index: 1;
+    }
+
+    /* Green circle behind cup */
+    .cup-circle {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 44px;
+      background: #3a8c58;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .text-right {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #4a7a5a;
+      text-transform: uppercase;
+      font-family: 'Trebuchet MS', sans-serif;
+      opacity: 0.85;
+    }
+
+    /* Bottom card number area */
+    .card-number {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: #5a8a6a;
+      opacity: 0.7;
+      z-index: 10;
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <!-- Sparkles -->
+  <span class="sparkle">✦</span>
+  <span class="sparkle">✦</span>
+  <span class="sparkle">·</span>
+  <span class="sparkle">✦</span>
+  <span class="sparkle">·</span>
+  <span class="sparkle">·</span>
+  <span class="sparkle">✦</span>
+
+  <!-- Scattered dots -->
+  <div class="dots">
+    <div class="dot" style="top:30px;left:90px"></div>
+    <div class="dot" style="top:55px;left:45px"></div>
+    <div class="dot" style="top:140px;left:75px"></div>
+    <div class="dot" style="top:160px;left:260px"></div>
+    <div class="dot" style="top:40px;left:210px"></div>
+    <div class="dot" style="top:80px;left:300px"></div>
+    <div class="dot" style="top:110px;left:190px"></div>
+    <div class="dot" style="top:170px;left:140px"></div>
+    <div class="dot" style="top:25px;left:155px"></div>
+    <div class="dot" style="top:190px;left:310px"></div>
+  </div>
+
+  <!-- Brand top right -->
+  <div class="brand">Kaia's</div>
+
+  <!-- Center layout: KAIA'S [cup] TREAT -->
+  <div class="center">
+    <span class="text-left">KAIA'S</span>
+
+    <div class="cup-wrap">
+      <div class="cup-circle"></div>
+      <!-- Cup SVG -->
+      <svg class="cup-svg" viewBox="0 0 48 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Lid -->
+        <rect x="10" y="4" width="28" height="6" rx="3" fill="#c8e6cc"/>
+        <rect x="13" y="2" width="22" height="4" rx="2" fill="#daeeda"/>
+        <!-- Cup body -->
+        <path d="M11 10 L14 52 Q14 56 18 56 L30 56 Q34 56 34 52 L37 10 Z" fill="#e8f5ea"/>
+        <!-- Green sleeve band -->
+        <path d="M12 28 L36 28 L35 36 L13 36 Z" fill="#5ab87a" opacity="0.6"/>
+        <!-- Kaia's logo circle on cup -->
+        <circle cx="24" cy="32" r="7" fill="#3a8c58"/>
+        <text x="24" y="36" text-anchor="middle" font-size="7" fill="white" font-family="Georgia" font-weight="bold">K</text>
+        <!-- Straw -->
+        <rect x="22" y="0" width="3" height="8" rx="1.5" fill="#b0d4b8"/>
+      </svg>
+
+      <!-- Hand SVG -->
+      <svg class="hand-svg" viewBox="0 0 52 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Palm -->
+        <path d="M4 30 Q4 20 12 18 L20 16 L32 14 Q40 13 42 18 Q44 22 40 24 L28 26 L16 28 Q10 30 8 34 Z" fill="#3a8c58"/>
+        <!-- Thumb suggestion -->
+        <path d="M38 16 Q46 12 48 18 Q50 22 44 24" stroke="#2d6b47" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Wrist -->
+        <path d="M8 32 Q10 36 14 36 L18 34" stroke="#2d6b47" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <span class="text-right">TREAT</span>
+  </div>
+
+  <!-- Card number -->
+  <div class="card-number">6076 • 1234 • 5678 • 9012</div>
+</div>
+
+</body>
+</html>
