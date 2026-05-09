@@ -85,6 +85,29 @@
       opacity: 0.35;
     }
 
+    /* Value top-left */
+    .value {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      z-index: 10;
+      line-height: 1;
+    }
+    .value-amount {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6b47;
+      font-family: 'Trebuchet MS', sans-serif;
+      letter-spacing: 1px;
+    }
+    .value-label {
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: #5a8a6a;
+      text-transform: uppercase;
+      font-family: 'Trebuchet MS', sans-serif;
+    }
+
     /* Brand name top-right */
     .brand {
       position: absolute;
@@ -136,16 +159,6 @@
       height: 62px;
       position: relative;
       z-index: 2;
-    }
-
-    /* Hand SVG */
-    .hand-svg {
-      position: absolute;
-      bottom: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 52px;
-      z-index: 1;
     }
 
     /* Green circle behind cup */
@@ -211,6 +224,12 @@
     <div class="dot" style="top:190px;left:310px"></div>
   </div>
 
+  <!-- Value top left -->
+  <div class="value">
+    <div class="value-amount">$1,000</div>
+    <div class="value-label">Gift Card</div>
+  </div>
+
   <!-- Brand top right -->
   <div class="brand">Kaia's</div>
 
@@ -236,15 +255,6 @@
         <rect x="22" y="0" width="3" height="8" rx="1.5" fill="#b0d4b8"/>
       </svg>
 
-      <!-- Hand SVG -->
-      <svg class="hand-svg" viewBox="0 0 52 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Palm -->
-        <path d="M4 30 Q4 20 12 18 L20 16 L32 14 Q40 13 42 18 Q44 22 40 24 L28 26 L16 28 Q10 30 8 34 Z" fill="#3a8c58"/>
-        <!-- Thumb suggestion -->
-        <path d="M38 16 Q46 12 48 18 Q50 22 44 24" stroke="#2d6b47" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <!-- Wrist -->
-        <path d="M8 32 Q10 36 14 36 L18 34" stroke="#2d6b47" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      </svg>
     </div>
 
     <span class="text-right">TREAT</span>
