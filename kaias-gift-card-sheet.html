@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kaia's Gift Card Sheet</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 8.5in;
+      height: 11in;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 0.15in;
+      padding: 0.3in;
+      background: #fff;
+    }
+
+    .card {
+      background: #d6e8d8;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      width: 55%;
+      height: 85%;
+      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 70%);
+      top: -20%;
+      left: -10%;
+      border-radius: 50%;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 75%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      bottom: -15%;
+      right: -5%;
+      border-radius: 50%;
+    }
+
+    .sparkle {
+      position: absolute;
+      color: #5a9e6f;
+      font-size: 0.55em;
+      opacity: 0.7;
+      animation: twinkle 2.5s infinite alternate;
+    }
+    .s1 { top: 47%; left: 6%; font-size: 0.7em; animation-delay: 0s; }
+    .s2 { top: 5%;  left: 38%; font-size: 0.38em; animation-delay: 0.4s; }
+    .s3 { top: 29%; left: 28%; font-size: 0.3em; animation-delay: 0.8s; }
+    .s4 { bottom: 13%; right: 29%; font-size: 0.45em; animation-delay: 0.2s; }
+    .s5 { bottom: 6%;  right: 16%; font-size: 0.34em; animation-delay: 1s; }
+    .s6 { top: 65%; left: 6%; font-size: 0.27em; animation-delay: 1.4s; }
+    .s7 { top: 5%;  right: 20%; font-size: 0.38em; animation-delay: 0.6s; }
+
+    @keyframes twinkle {
+      from { opacity: 0.4; transform: scale(0.9); }
+      to   { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    .dots { position: absolute; inset: 0; pointer-events: none; }
+    .dot {
+      position: absolute;
+      width: 1.5px;
+      height: 1.5px;
+      background: #6db88a;
+      border-radius: 50%;
+      opacity: 0.35;
+    }
+
+    .value {
+      position: absolute;
+      top: 7%;
+      left: 5%;
+      z-index: 10;
+      line-height: 1;
+      text-align: center;
+    }
+    .value-amount {
+      font-size: 0.72em;
+      font-weight: 700;
+      color: #2d6b47;
+      font-family: 'Trebuchet MS', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .value-label {
+      font-size: 0.26em;
+      letter-spacing: 1.5px;
+      color: #5a8a6a;
+      text-transform: uppercase;
+      font-family: 'Trebuchet MS', sans-serif;
+    }
+
+    .brand {
+      position: absolute;
+      top: 7%;
+      right: 5%;
+      font-size: 0.3em;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #2d6b47;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .text-left, .text-right {
+      font-size: 0.75em;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #4a7a5a;
+      text-transform: uppercase;
+      font-family: 'Trebuchet MS', sans-serif;
+      opacity: 0.85;
+    }
+
+    .cup-wrap {
+      position: relative;
+      width: 20%;
+      aspect-ratio: 0.8;
+      margin: 0 3%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cup-svg { width: 100%; height: 100%; position: relative; z-index: 2; }
+
+    .cup-circle {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      aspect-ratio: 1;
+      background: #3a8c58;
+      border-radius: 50%;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 12 cards -->
+  <div class="card" id="card-template">
+    <span class="sparkle s1">✦</span>
+    <span class="sparkle s2">✦</span>
+    <span class="sparkle s3">·</span>
+    <span class="sparkle s4">✦</span>
+    <span class="sparkle s5">·</span>
+    <span class="sparkle s6">·</span>
+    <span class="sparkle s7">✦</span>
+    <div class="dots">
+      <div class="dot" style="top:14%;left:26%"></div>
+      <div class="dot" style="top:26%;left:13%"></div>
+      <div class="dot" style="top:65%;left:22%"></div>
+      <div class="dot" style="top:75%;left:76%"></div>
+      <div class="dot" style="top:19%;left:62%"></div>
+      <div class="dot" style="top:37%;left:88%"></div>
+      <div class="dot" style="top:51%;left:56%"></div>
+      <div class="dot" style="top:79%;left:41%"></div>
+      <div class="dot" style="top:12%;left:46%"></div>
+      <div class="dot" style="top:89%;left:91%"></div>
+    </div>
+    <div class="value">
+      <div class="value-amount">$50</div>
+      <div class="value-label">Gift Card</div>
+    </div>
+    <div class="brand">Kaia's</div>
+    <div class="center">
+      <span class="text-left">KAIA'S</span>
+      <div class="cup-wrap">
+        <div class="cup-circle"></div>
+        <svg class="cup-svg" viewBox="0 0 48 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="4" width="28" height="6" rx="3" fill="#c8e6cc"/>
+          <rect x="13" y="2" width="22" height="4" rx="2" fill="#daeeda"/>
+          <path d="M11 10 L14 52 Q14 56 18 56 L30 56 Q34 56 34 52 L37 10 Z" fill="#e8f5ea"/>
+          <path d="M12 28 L36 28 L35 36 L13 36 Z" fill="#5ab87a" opacity="0.6"/>
+          <circle cx="24" cy="32" r="7" fill="#3a8c58"/>
+          <text x="24" y="36" text-anchor="middle" font-size="7" fill="white" font-family="Georgia" font-weight="bold">K</text>
+          <rect x="22" y="0" width="3" height="8" rx="1.5" fill="#b0d4b8"/>
+        </svg>
+      </div>
+      <span class="text-right">TREAT</span>
+    </div>
+  </div>
+
+  <script>
+    const template = document.getElementById('card-template');
+    for (let i = 1; i < 12; i++) {
+      document.body.appendChild(template.cloneNode(true));
+    }
+  </script>
+
+</body>
+</html>
