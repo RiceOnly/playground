@@ -7,26 +7,31 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      background: #fff;
+      font-family: 'Trebuchet MS', sans-serif;
+    }
+
+    .page {
       width: 8.5in;
       height: 11in;
       display: grid;
-      grid-template-columns: repeat(3, 2.533in);
-      grid-template-rows: repeat(4, 1.595in);
+      grid-template-columns: repeat(2, 3.375in);
+      grid-template-rows: repeat(4, 2.125in);
       gap: 0.15in;
-      padding: 0.3in;
-      background: #fff;
+      padding: 0.8in 0.8in;
+      page-break-after: always;
     }
 
-    /* Outer shell clips to exact card size */
+    /* Outer shell clips to exact gift card size */
     .card-outer {
-      width: 2.533in;
-      height: 1.595in;
+      width: 3.375in;
+      height: 2.125in;
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 11px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.15);
     }
 
-    /* Original card at full size, scaled down to fit */
+    /* Original card scaled to exact gift card size (324/340 = 0.953) */
     .card {
       width: 340px;
       height: 214px;
@@ -34,7 +39,7 @@
       border-radius: 11px;
       position: relative;
       overflow: hidden;
-      transform: scale(0.715);
+      transform: scale(0.953);
       transform-origin: top left;
     }
 
@@ -67,7 +72,7 @@
       opacity: 0.7;
       animation: twinkle 2.5s infinite alternate;
     }
-    .s1 { top: 100px; left: 22px; font-size: 18px; animation-delay: 0s; }
+    .s1 { top: 100px; left: 22px;  font-size: 18px; animation-delay: 0s; }
     .s2 { top: 10px;  left: 130px; font-size: 10px; animation-delay: 0.4s; }
     .s3 { top: 62px;  left: 95px;  font-size: 8px;  animation-delay: 0.8s; }
     .s4 { bottom: 28px; right: 100px; font-size: 12px; animation-delay: 0.2s; }
@@ -172,56 +177,66 @@
 </head>
 <body>
 
-  <div class="card-outer" id="card-template">
-    <div class="card">
-      <span class="sparkle s1">✦</span>
-      <span class="sparkle s2">✦</span>
-      <span class="sparkle s3">·</span>
-      <span class="sparkle s4">✦</span>
-      <span class="sparkle s5">·</span>
-      <span class="sparkle s6">·</span>
-      <span class="sparkle s7">✦</span>
-      <div class="dots">
-        <div class="dot" style="top:30px;left:90px"></div>
-        <div class="dot" style="top:55px;left:45px"></div>
-        <div class="dot" style="top:140px;left:75px"></div>
-        <div class="dot" style="top:160px;left:260px"></div>
-        <div class="dot" style="top:40px;left:210px"></div>
-        <div class="dot" style="top:80px;left:300px"></div>
-        <div class="dot" style="top:110px;left:190px"></div>
-        <div class="dot" style="top:170px;left:140px"></div>
-        <div class="dot" style="top:25px;left:155px"></div>
-        <div class="dot" style="top:190px;left:310px"></div>
-      </div>
-      <div class="value">
-        <div class="value-amount">$50</div>
-        <div class="value-label">Gift Card</div>
-      </div>
-      <div class="brand">Kaia's</div>
-      <div class="center">
-        <span class="text-left">KAIA'S</span>
-        <div class="cup-wrap">
-          <div class="cup-circle"></div>
-          <svg class="cup-svg" viewBox="0 0 48 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="4" width="28" height="6" rx="3" fill="#c8e6cc"/>
-            <rect x="13" y="2" width="22" height="4" rx="2" fill="#daeeda"/>
-            <path d="M11 10 L14 52 Q14 56 18 56 L30 56 Q34 56 34 52 L37 10 Z" fill="#e8f5ea"/>
-            <path d="M12 28 L36 28 L35 36 L13 36 Z" fill="#5ab87a" opacity="0.6"/>
-            <circle cx="24" cy="32" r="7" fill="#3a8c58"/>
-            <text x="24" y="36" text-anchor="middle" font-size="7" fill="white" font-family="Georgia" font-weight="bold">K</text>
-            <rect x="22" y="0" width="3" height="8" rx="1.5" fill="#b0d4b8"/>
-          </svg>
-        </div>
-        <span class="text-right">TREAT</span>
-      </div>
-    </div>
-  </div>
+  <!-- Page 1: 8 cards -->
+  <div class="page" id="page1"></div>
+
+  <!-- Page 2: 4 cards -->
+  <div class="page" id="page2"></div>
 
   <script>
-    const template = document.getElementById('card-template');
-    for (let i = 1; i < 12; i++) {
-      document.body.appendChild(template.cloneNode(true));
+    function makeCard() {
+      const outer = document.createElement('div');
+      outer.className = 'card-outer';
+      outer.innerHTML = `
+        <div class="card">
+          <span class="sparkle s1">✦</span>
+          <span class="sparkle s2">✦</span>
+          <span class="sparkle s3">·</span>
+          <span class="sparkle s4">✦</span>
+          <span class="sparkle s5">·</span>
+          <span class="sparkle s6">·</span>
+          <span class="sparkle s7">✦</span>
+          <div class="dots">
+            <div class="dot" style="top:30px;left:90px"></div>
+            <div class="dot" style="top:55px;left:45px"></div>
+            <div class="dot" style="top:140px;left:75px"></div>
+            <div class="dot" style="top:160px;left:260px"></div>
+            <div class="dot" style="top:40px;left:210px"></div>
+            <div class="dot" style="top:80px;left:300px"></div>
+            <div class="dot" style="top:110px;left:190px"></div>
+            <div class="dot" style="top:170px;left:140px"></div>
+            <div class="dot" style="top:25px;left:155px"></div>
+            <div class="dot" style="top:190px;left:310px"></div>
+          </div>
+          <div class="value">
+            <div class="value-amount">$50</div>
+            <div class="value-label">Gift Card</div>
+          </div>
+          <div class="brand">Kaia's</div>
+          <div class="center">
+            <span class="text-left">KAIA'S</span>
+            <div class="cup-wrap">
+              <div class="cup-circle"></div>
+              <svg class="cup-svg" viewBox="0 0 48 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="4" width="28" height="6" rx="3" fill="#c8e6cc"/>
+                <rect x="13" y="2" width="22" height="4" rx="2" fill="#daeeda"/>
+                <path d="M11 10 L14 52 Q14 56 18 56 L30 56 Q34 56 34 52 L37 10 Z" fill="#e8f5ea"/>
+                <path d="M12 28 L36 28 L35 36 L13 36 Z" fill="#5ab87a" opacity="0.6"/>
+                <circle cx="24" cy="32" r="7" fill="#3a8c58"/>
+                <text x="24" y="36" text-anchor="middle" font-size="7" fill="white" font-family="Georgia" font-weight="bold">K</text>
+                <rect x="22" y="0" width="3" height="8" rx="1.5" fill="#b0d4b8"/>
+              </svg>
+            </div>
+            <span class="text-right">TREAT</span>
+          </div>
+        </div>`;
+      return outer;
     }
+
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    for (let i = 0; i < 8; i++)  page1.appendChild(makeCard());
+    for (let i = 0; i < 4; i++)  page2.appendChild(makeCard());
   </script>
 
 </body>
