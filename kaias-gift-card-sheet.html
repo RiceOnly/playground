@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kaia's Gift Card Sheet</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #fff;
+      font-family: 'Trebuchet MS', sans-serif;
+    }
+
+    .page {
+      width: 8.5in;
+      height: 11in;
+      display: grid;
+      grid-template-columns: repeat(2, 3.375in);
+      grid-template-rows: repeat(4, 2.125in);
+      gap: 0.15in;
+      padding: 0.8in 0.8in;
+      page-break-after: always;
+    }
+
+    /* Outer shell clips to exact gift card size */
+    .card-outer {
+      width: 3.375in;
+      height: 2.125in;
+      overflow: hidden;
+      border-radius: 11px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    /* Original card scaled to exact gift card size (324/340 = 0.953) */
+    .card {
+      width: 340px;
+      height: 214px;
+      background: #d6e8d8;
+      border-radius: 11px;
+      position: relative;
+      overflow: hidden;
+      transform: scale(0.953);
+      transform-origin: top left;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 70%);
+      top: -40px;
+      left: -40px;
+      border-radius: 50%;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      bottom: -30px;
+      right: -20px;
+      border-radius: 50%;
+    }
+
+    .sparkle {
+      position: absolute;
+      color: #5a9e6f;
+      font-size: 14px;
+      opacity: 0.7;
+      animation: twinkle 2.5s infinite alternate;
+    }
+    .s1 { top: 100px; left: 22px;  font-size: 18px; animation-delay: 0s; }
+    .s2 { top: 10px;  left: 130px; font-size: 10px; animation-delay: 0.4s; }
+    .s3 { top: 62px;  left: 95px;  font-size: 8px;  animation-delay: 0.8s; }
+    .s4 { bottom: 28px; right: 100px; font-size: 12px; animation-delay: 0.2s; }
+    .s5 { bottom: 14px; right: 55px;  font-size: 9px;  animation-delay: 1s; }
+    .s6 { top: 140px; left: 20px;  font-size: 7px;  animation-delay: 1.4s; }
+    .s7 { top: 12px;  right: 70px; font-size: 10px; animation-delay: 0.6s; }
+
+    @keyframes twinkle {
+      from { opacity: 0.4; transform: scale(0.9); }
+      to   { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    .dots { position: absolute; inset: 0; pointer-events: none; }
+    .dot {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #6db88a;
+      border-radius: 50%;
+      opacity: 0.35;
+    }
+
+    .value {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      z-index: 10;
+      line-height: 1;
+      text-align: center;
+    }
+    .value-amount {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d6b47;
+      font-family: 'Trebuchet MS', sans-serif;
+      letter-spacing: 1px;
+    }
+    .value-label {
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: #5a8a6a;
+      text-transform: uppercase;
+      font-family: 'Trebuchet MS', sans-serif;
+    }
+
+    .brand {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #2d6b47;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .text-left, .text-right {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #4a7a5a;
+      text-transform: uppercase;
+      font-family: 'Trebuchet MS', sans-serif;
+      opacity: 0.85;
+    }
+
+    .cup-wrap {
+      position: relative;
+      width: 64px;
+      height: 80px;
+      margin: 0 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cup-svg { width: 48px; height: 62px; position: relative; z-index: 2; }
+
+    .cup-circle {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 44px;
+      background: #3a8c58;
+      border-radius: 50%;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page 1: 8 cards -->
+  <div class="page" id="page1"></div>
+
+  <!-- Page 2: 4 cards -->
+  <div class="page" id="page2"></div>
+
+  <script>
+    function makeCard() {
+      const outer = document.createElement('div');
+      outer.className = 'card-outer';
+      outer.innerHTML = `
+        <div class="card">
+          <span class="sparkle s1">✦</span>
+          <span class="sparkle s2">✦</span>
+          <span class="sparkle s3">·</span>
+          <span class="sparkle s4">✦</span>
+          <span class="sparkle s5">·</span>
+          <span class="sparkle s6">·</span>
+          <span class="sparkle s7">✦</span>
+          <div class="dots">
+            <div class="dot" style="top:30px;left:90px"></div>
+            <div class="dot" style="top:55px;left:45px"></div>
+            <div class="dot" style="top:140px;left:75px"></div>
+            <div class="dot" style="top:160px;left:260px"></div>
+            <div class="dot" style="top:40px;left:210px"></div>
+            <div class="dot" style="top:80px;left:300px"></div>
+            <div class="dot" style="top:110px;left:190px"></div>
+            <div class="dot" style="top:170px;left:140px"></div>
+            <div class="dot" style="top:25px;left:155px"></div>
+            <div class="dot" style="top:190px;left:310px"></div>
+          </div>
+          <div class="value">
+            <div class="value-amount">$50</div>
+            <div class="value-label">Gift Card</div>
+          </div>
+          <div class="brand">Kaia's</div>
+          <div class="center">
+            <span class="text-left">KAIA'S</span>
+            <div class="cup-wrap">
+              <div class="cup-circle"></div>
+              <svg class="cup-svg" viewBox="0 0 48 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="4" width="28" height="6" rx="3" fill="#c8e6cc"/>
+                <rect x="13" y="2" width="22" height="4" rx="2" fill="#daeeda"/>
+                <path d="M11 10 L14 52 Q14 56 18 56 L30 56 Q34 56 34 52 L37 10 Z" fill="#e8f5ea"/>
+                <path d="M12 28 L36 28 L35 36 L13 36 Z" fill="#5ab87a" opacity="0.6"/>
+                <circle cx="24" cy="32" r="7" fill="#3a8c58"/>
+                <text x="24" y="36" text-anchor="middle" font-size="7" fill="white" font-family="Georgia" font-weight="bold">K</text>
+                <rect x="22" y="0" width="3" height="8" rx="1.5" fill="#b0d4b8"/>
+              </svg>
+            </div>
+            <span class="text-right">TREAT</span>
+          </div>
+        </div>`;
+      return outer;
+    }
+
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    for (let i = 0; i < 8; i++)  page1.appendChild(makeCard());
+    for (let i = 0; i < 4; i++)  page2.appendChild(makeCard());
+  </script>
+
+</body>
+</html>
